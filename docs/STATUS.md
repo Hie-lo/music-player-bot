@@ -23,10 +23,11 @@ Last updated: 2026-09-17
 
 The live Playback Proof of Concept cannot run in the current workspace yet because:
 
-- `.env` is not present (credential values must remain local and must never be committed).
+- `.env` is not present in the Agent workspace (credential values must remain local and must never be committed).
 - `ffmpeg` is not installed in the workspace.
 - Docker is not installed in the workspace.
 - No Telegram Bot/Assistant environment is available to the process.
+- The requested PostgreSQL host port is 5431; use `127.0.0.1:5431` when the bot runs on the host, or `postgres:5432` when the bot runs inside Docker Compose.
 
 The agent can continue building offline-safe Core and tooling, but must not claim Gate 1 or Voice Chat playback is complete until the live test runs.
 
