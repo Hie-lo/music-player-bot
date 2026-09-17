@@ -20,6 +20,31 @@ _TRUE_VALUES = {"1", "true", "yes", "on"}
 _FALSE_VALUES = {"0", "false", "no", "off"}
 
 
+def _load_dotenv(path: Path) -> dict[str, str]:
+    """Load the small KEY=VALUE subset used by this project.
+
+    Process environment variables always override `.env`. This avoids adding a
+    mandatory dependency just for configuration loading and keeps the behavior
+    deterministic in tests.
+    """
+    if not path.exists():
+        return {}
+    values: dict[str, str] = {}
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, raw_value = line.split("=", 1)
+        key = key.strip()
+        if not key or not key.replace("_", "").isalnum():
+            continue
+        value = raw_value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+            value = value[1:-1]
+        values[key] = value
+    return values
+
+
 def _env(mapping: Mapping[str, str], name: str, default: str | None = None) -> str | None:
     value = mapping.get(name, default)
     if value is None:
@@ -74,7 +99,7 @@ class Settings:
     temp_media_dir: Path = Path("./runtime/media")
     max_track_duration_seconds: int = 7200
     max_queue_size: int = 100
-    database_url: str = "postgresql+asyncpg://musicbot:musicbot@localhost:5432/musicbot"
+    database_url: str = "postgresql+asyncpg://musicbot:musicbot@127.0.0.1:5431/musicbot"
     redis_url: str = "redis://localhost:6379/0"
     webapp_base_url: str | None = None
     webhook_base_url: str | None = None
@@ -113,7 +138,7 @@ class Settings:
             database_url=_env(
                 values,
                 "DATABASE_URL",
-                "postgresql+asyncpg://musicbot:musicbot@localhost:5432/musicbot",
+                "postgresql+asyncpg://musicbot:musicbot@127.0.0.1:5431/musicbot",
             )
             or "",
             redis_url=_env(values, "REDIS_URL", "redis://localhost:6379/0") or "",
@@ -129,8 +154,11 @@ class Settings:
         )
 
     @classmethod
-    def from_environment(cls) -> "Settings":
-        return cls.from_mapping()
+    def from_environment(cls, dotenv_path: Path | None = None) -> "Settings":
+        path = dotenv_path or Path(os.getenv("ENV_FILE", ".env"))
+        dotenv_values = _load_dotenv(path)
+        merged = {**dotenv_values, **os.environ}
+        return cls.from_mapping(merged)
 
     def require_bot_runtime(self) -> None:
         """Validate values needed by the Bot Gateway without exposing them."""

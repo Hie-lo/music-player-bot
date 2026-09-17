@@ -17,8 +17,9 @@
 
 - [AGENTS.md](AGENTS.md)
 - [Project Playbook](docs/PROJECT_PLAYBOOK.md)
+- [راهنمای تکمیل `.env` و راه‌اندازی Providerها](docs/SETUP_ENV.md)
 
-Playbook شامل معماری، مراحل Gate-based، مسئولیت کاربر و Agent، معیارهای تست، محدودیت Providerها و قواعد امنیتی پروژه است.
+Playbook شامل معماری، مراحل Gate-based، مسئولیت کاربر و Agent، معیارهای تست، محدودیت Providerها و قواعد امنیتی پروژه است. راهنمای Setup نیز تفاوت PostgreSQL روی پورت 5431، Docker، Telegram، Assistant، FFmpeg، YouTube و Spotify را توضیح می‌دهد.
 
 ## وضعیت فعلی
 

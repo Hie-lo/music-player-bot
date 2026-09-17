@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+import tempfile
 import unittest
 
 from music_player_bot.config import Settings, SettingsError
@@ -27,6 +29,19 @@ class SettingsTests(unittest.TestCase):
         self.assertTrue(settings.enable_video)
         with self.assertRaises(SettingsError):
             Settings.from_mapping({"ENABLE_VIDEO": "maybe"})
+
+    def test_dotenv_is_loaded_without_printing_secret(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / ".env"
+            path.write_text(
+                "BOT_TOKEN=local-secret\nAPI_ID=123\nAPI_HASH=hash\nDATABASE_URL=postgresql+asyncpg://u:p@127.0.0.1:5431/db\n",
+                encoding="utf-8",
+            )
+            settings = Settings.from_environment(path)
+            self.assertEqual(settings.api_id, 123)
+            self.assertTrue(settings.bot_token)
+            self.assertIn(":5431/", settings.database_url)
+            self.assertNotIn("bot_token", repr(settings))
 
     def test_runtime_checks_do_not_expose_values(self) -> None:
         settings = Settings.from_mapping({"BOT_TOKEN": "secret", "API_ID": "123"})

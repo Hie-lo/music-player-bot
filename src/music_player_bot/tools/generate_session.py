@@ -17,7 +17,7 @@ from pathlib import Path
 import stat
 import sys
 
-from music_player_bot.config import SettingsError
+from music_player_bot.config import Settings, SettingsError
 
 
 def _upsert_env(path: Path, key: str, value: str) -> None:
@@ -39,8 +39,11 @@ def _upsert_env(path: Path, key: str, value: str) -> None:
 
 
 def _read_api_credentials() -> tuple[int, str]:
-    api_id_raw = os.getenv("API_ID") or input("Telegram API_ID (not logged): ").strip()
-    api_hash = os.getenv("API_HASH") or getpass("Telegram API_HASH (hidden): ").strip()
+    loaded = Settings.from_environment()
+    api_id_raw = str(loaded.api_id) if loaded.api_id is not None else input(
+        "Telegram API_ID (not logged): "
+    ).strip()
+    api_hash = loaded.api_hash or getpass("Telegram API_HASH (hidden): ").strip()
     try:
         api_id = int(api_id_raw)
     except ValueError as exc:
