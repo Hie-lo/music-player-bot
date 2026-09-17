@@ -261,7 +261,6 @@ MAX_QUEUE_SIZE=100
 ```env
 ENABLE_EXTERNAL_PROVIDERS=false
 ENABLE_VIDEO=false
-ENABLE_MINI_APP=false
 ```
 
 بعد از موفقیت Audio Playback POC، هر قابلیت جداگانه فعال و تست می‌شود.
@@ -325,23 +324,22 @@ Access Token و Refresh Token را در `.env` دائمی قرار ندهید؛ 
 
 ---
 
-## 12) Mini App و Webhook
+## 12) Telegram Webhook اختیاری
 
-تا قبل از آماده‌شدن Domain و HTTPS خالی بماند:
+رابط کاربری پروژه Telegram Native Panel است و Mini App/Web App در Scope فعلی نیست.
+
+برای Long Polling این مقادیر خالی بمانند:
 
 ```env
-WEBAPP_BASE_URL=
 WEBHOOK_BASE_URL=
 WEBHOOK_SECRET=
 ```
 
-برای Production:
+برای Production با Webhook:
 
 ```env
-WEBAPP_BASE_URL=https://app.YOUR_DOMAIN.example
 WEBHOOK_BASE_URL=https://bot.YOUR_DOMAIN.example
 WEBHOOK_SECRET=یک_مقدار_تصادفی_بلند
-ENABLE_MINI_APP=true
 ```
 
 `WEBHOOK_SECRET` را با Password Manager یا Secret Generator بسازید و در Chat ارسال نکنید.
@@ -370,7 +368,6 @@ REDIS_URL=redis://127.0.0.1:16379/0
 POSTGRES_HOST_PORT=5431
 REDIS_HOST_PORT=16379
 
-WEBAPP_BASE_URL=
 WEBHOOK_BASE_URL=
 WEBHOOK_SECRET=
 
@@ -382,7 +379,6 @@ TEST_CHAT_ID=
 
 ENABLE_EXTERNAL_PROVIDERS=false
 ENABLE_VIDEO=false
-ENABLE_MINI_APP=false
 ```
 
 ---

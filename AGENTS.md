@@ -39,7 +39,7 @@
 5. Audio MVP تلگرام
 6. Persistence، امنیت و UX
 7. Providerها به‌صورت جداگانه
-8. Video و Mini App فقط بعد از تست
+8. Video فقط بعد از تست؛ رابط اصلی پروژه Telegram Native Panel است
 9. Production Hardening و Release
 ```
 

@@ -101,7 +101,6 @@ class Settings:
     max_queue_size: int = 100
     database_url: str = "postgresql+asyncpg://musicbot:musicbot@127.0.0.1:5431/musicbot"
     redis_url: str = "redis://127.0.0.1:16379/0"
-    webapp_base_url: str | None = None
     webhook_base_url: str | None = None
     webhook_secret: str | None = field(default=None, repr=False)
     spotify_client_id: str | None = field(default=None, repr=False)
@@ -142,7 +141,6 @@ class Settings:
             )
             or "",
             redis_url=_env(values, "REDIS_URL", "redis://127.0.0.1:16379/0") or "",
-            webapp_base_url=_env(values, "WEBAPP_BASE_URL"),
             webhook_base_url=_env(values, "WEBHOOK_BASE_URL"),
             webhook_secret=_env(values, "WEBHOOK_SECRET"),
             spotify_client_id=_env(values, "SPOTIFY_CLIENT_ID"),
@@ -150,7 +148,6 @@ class Settings:
             youtube_api_key=_env(values, "YOUTUBE_API_KEY"),
             enable_external_providers=_boolean(values, "ENABLE_EXTERNAL_PROVIDERS"),
             enable_video=_boolean(values, "ENABLE_VIDEO"),
-            enable_mini_app=_boolean(values, "ENABLE_MINI_APP"),
         )
 
     @classmethod

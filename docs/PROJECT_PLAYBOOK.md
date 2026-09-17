@@ -43,7 +43,6 @@
 ### 0.4 منابع مرجع Policy
 
 - Telegram Bot API: https://core.telegram.org/bots/api
-- Telegram Mini Apps: https://core.telegram.org/bots/webapps
 - YouTube Developer Policies: https://developers.google.com/youtube/terms/developer-policies
 - YouTube Terms: https://www.youtube.com/t/terms
 - Spotify Web Playback SDK: https://developer.spotify.com/documentation/web-playback-sdk
@@ -93,7 +92,7 @@
 - اجرای تست واقعی و گزارش نتیجه، بدون ادعای کاذب.
 - پیاده‌سازی Core مستقل از Telegram.
 - پیاده‌سازی Adapterهای Provider با سطح پشتیبانی شفاف.
-- ساخت پنل Native و Mini App طبق Gateهای پروژه.
+- ساخت پنل Native تلگرام طبق Gateهای پروژه.
 - ثبت ریسک، Blocker و تصمیم‌های معماری.
 
 ---
@@ -123,7 +122,6 @@ Ports
 bot-gateway       دریافت Command و Callback
 player-service    Assistant، Voice Chat و Playback
 media-worker      Resolve، Metadata، FFmpeg و Cleanup
-webapp-api        Mini App و API خصوصی
 postgres          منبع اصلی داده دائمی
 redis             Lock، Cache و State موقت
 ```
@@ -356,7 +354,7 @@ Provider خراب نباید کل Bot یا Player را Crash کند.
 
 ---
 
-## Gate 6 — Video و Mini App
+## Gate 6 — Video و Telegram Native Panel Hardening
 
 ### Video
 
@@ -373,73 +371,20 @@ Provider خراب نباید کل Bot یا Player را Crash کند.
 - [ ] Resource Manager.
 - [ ] تست CPU/RAM.
 
-### Mini App
+### Telegram Native Panel
 
-- [ ] HTTPS.
-- [ ] اعتبارسنجی `initData`.
-- [ ] Authorization بر اساس User و Chat.
-- [ ] Dashboard.
-- [ ] Queue Drag & Drop.
-- [ ] Playlist Manager.
-- [ ] Search.
-- [ ] وضعیت Now Playing.
-- [ ] WebSocket با احراز هویت.
-- [ ] RTL و Theme تلگرام.
-- [ ] Fallback به Native Panel.
+- [ ] پنل عکس‌دار گروه.
+- [ ] پنل خصوصی با Inline Keyboard.
+- [ ] Callback Payload امضاشده و محدود به کاربر/گروه.
+- [ ] کنترل Queue، Playlist و Permission فقط از طریق Application Use Case.
+- [ ] به‌روزرسانی محدود پیام برای جلوگیری از Flood/Rate Limit.
+- [ ] RTL و متن فارسی.
+
+Web App/Mini App در Scope این پروژه نیست؛ رابط کاربری رسمی پروژه فقط Telegram Native Panel است.
 
 ### معیار خروج
 
-Mini App نباید قابلیت‌های اصلی Bot را خراب کند. هر قابلیت باید از همان Application Use Case استفاده کند، نه منطق جداگانه.
-
----
-
-## Gate 7 — Production و Release
-
-### Agent باید انجام دهد
-
-- [ ] Dockerfile Production.
-- [ ] Docker Compose Production.
-- [ ] Reverse Proxy و HTTPS.
-- [ ] Health Endpoint.
-- [ ] Readiness/Liveness Check.
-- [ ] Structured Logging.
-- [ ] Metrics.
-- [ ] Alerting.
-- [ ] Database Backup.
-- [ ] Restore Drill.
-- [ ] Graceful Shutdown.
-- [ ] Retry و Backoff.
-- [ ] Resource Quota.
-- [ ] Runbook خطاها.
-- [ ] مستندات نصب از صفر.
-- [ ] تست Clean Install.
-- [ ] Security Review.
-- [ ] `git diff --check`.
-- [ ] حذف Secretهای احتمالی با بررسی Git.
-- [ ] Tag نسخه فقط بعد از قبولی همه Gateها.
-
-### کاربر باید انجام دهد
-
-- [ ] VPS مناسب فراهم کند.
-- [ ] Domain و HTTPS فراهم کند.
-- [ ] `.env` Production را خارج از Git ایجاد کند.
-- [ ] Backup Location تعیین کند.
-- [ ] Test Group و Admin نهایی تعیین کند.
-- [ ] Policy استفاده از محتوا را تأیید کند.
-- [ ] تست پذیرش نهایی را انجام دهد.
-
-### معیار Release
-
-```text
-All mandatory tests pass
-No secrets in Git
-Audio POC passed
-Recovery passed
-Backup restored successfully
-Provider levels documented
-Known limitations published
-User setup documented
-```
+Video و Panel باید قابلیت‌های اصلی Bot را خراب نکنند و تست‌های Gateهای قبلی را حفظ کنند.
 
 ---
 
@@ -528,7 +473,7 @@ Gate 2 — Foundation: NOT_STARTED
 Gate 3 — Audio MVP: NOT_STARTED
 Gate 4 — Persistence/Security/Product: NOT_STARTED
 Gate 5 — Providers: NOT_STARTED
-Gate 6 — Video/Mini App: NOT_STARTED
+Gate 6 — Video/Telegram Native Panel Hardening: NOT_STARTED
 Gate 7 — Production/Release: NOT_STARTED
 ```
 

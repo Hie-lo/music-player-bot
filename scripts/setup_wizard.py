@@ -147,7 +147,6 @@ def main() -> int:
 
     external = ask_bool("Enable external providers now?", False)
     video = ask_bool("Enable experimental video now?", False)
-    mini_app = ask_bool("Enable Mini App now?", False)
 
     database_url = (
         f"postgresql+asyncpg://{quote_plus(db_user)}:{quote_plus(db_password)}"
@@ -174,7 +173,6 @@ def main() -> int:
         "POSTGRES_DB": db_name,
         "POSTGRES_PASSWORD": db_password,
         "SETUP_DB_MODE": db_mode,
-        "WEBAPP_BASE_URL": existing.get("WEBAPP_BASE_URL", ""),
         "WEBHOOK_BASE_URL": existing.get("WEBHOOK_BASE_URL", ""),
         "WEBHOOK_SECRET": existing.get("WEBHOOK_SECRET", ""),
         "SPOTIFY_CLIENT_ID": spotify_id,
@@ -184,7 +182,6 @@ def main() -> int:
         "TEST_CHAT_ID": test_chat_id,
         "ENABLE_EXTERNAL_PROVIDERS": "true" if external else "false",
         "ENABLE_VIDEO": "true" if video else "false",
-        "ENABLE_MINI_APP": "true" if mini_app else "false",
     }
     write_env(values)
     print(".env created/updated securely.")
