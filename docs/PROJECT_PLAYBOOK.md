@@ -166,7 +166,7 @@ PLAYING/PAUSED → STOPPING → IDLE
 - هر AI جدید بداند اول چه بخواند و چه چیزی ممنوع است.
 - هیچ تصمیم فنی بدون Gate بعدی قفل نشود.
 
-**وضعیت:** `READY_FOR_GATE_1`
+**وضعیت:** `DONE` برای Baseline؛ `GATE_1_BLOCKED_RUNTIME_PREREQUISITES` برای ادامه
 
 ---
 
