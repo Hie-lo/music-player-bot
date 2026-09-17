@@ -39,6 +39,7 @@ psql -h 127.0.0.1 -p 5431 -U musicbot -d musicbot
 
 ```env
 POSTGRES_HOST_PORT=5431
+REDIS_HOST_PORT=16379
 DATABASE_URL=postgresql+asyncpg://musicbot:musicbot@127.0.0.1:5431/musicbot
 ```
 
@@ -64,7 +65,7 @@ REDIS_URL=redis://redis:6379/0
 
 - Bot روی Host: `127.0.0.1:5431`
 - Bot داخل Docker: `postgres:5432`
-- Redis روی Host: `127.0.0.1:6379`
+- Redis روی Host: `127.0.0.1:16379`
 - Redis داخل Docker: `redis:6379`
 
 ---
@@ -74,7 +75,7 @@ REDIS_URL=redis://redis:6379/0
 برای Redis محلی یا Docker با Port Mapping:
 
 ```env
-REDIS_URL=redis://127.0.0.1:6379/0
+REDIS_URL=redis://127.0.0.1:16379/0
 ```
 
 برای Bot داخل Compose:
@@ -86,7 +87,7 @@ REDIS_URL=redis://redis:6379/0
 بررسی:
 
 ```bash
-redis-cli -h 127.0.0.1 -p 6379 ping
+redis-cli -h 127.0.0.1 -p 16379 ping
 ```
 
 خروجی باید این باشد:
@@ -365,8 +366,9 @@ MAX_TRACK_DURATION_SECONDS=7200
 MAX_QUEUE_SIZE=100
 
 DATABASE_URL=postgresql+asyncpg://musicbot:YOUR_DB_PASSWORD@127.0.0.1:5431/musicbot
-REDIS_URL=redis://127.0.0.1:6379/0
+REDIS_URL=redis://127.0.0.1:16379/0
 POSTGRES_HOST_PORT=5431
+REDIS_HOST_PORT=16379
 
 WEBAPP_BASE_URL=
 WEBHOOK_BASE_URL=

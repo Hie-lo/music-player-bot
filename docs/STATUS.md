@@ -27,7 +27,7 @@ The live Playback Proof of Concept cannot run in the current workspace yet becau
 - `ffmpeg` is not installed in the workspace.
 - Docker is not installed in the workspace.
 - No Telegram Bot/Assistant environment is available to the process.
-- The requested PostgreSQL host port is 5431; use `127.0.0.1:5431` when the bot runs on the host, or `postgres:5432` when the bot runs inside Docker Compose.
+- This project uses isolated host ports by default: PostgreSQL `5431` and Redis `16379`. Use `127.0.0.1:5431`/`127.0.0.1:16379` when the bot runs on the host, or `postgres:5432`/`redis:6379` when the bot runs inside Docker Compose.
 
 The agent can continue building offline-safe Core and tooling, but must not claim Gate 1 or Voice Chat playback is complete until the live test runs.
 

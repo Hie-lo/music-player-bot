@@ -100,7 +100,7 @@ class Settings:
     max_track_duration_seconds: int = 7200
     max_queue_size: int = 100
     database_url: str = "postgresql+asyncpg://musicbot:musicbot@127.0.0.1:5431/musicbot"
-    redis_url: str = "redis://localhost:6379/0"
+    redis_url: str = "redis://127.0.0.1:16379/0"
     webapp_base_url: str | None = None
     webhook_base_url: str | None = None
     webhook_secret: str | None = field(default=None, repr=False)
@@ -141,7 +141,7 @@ class Settings:
                 "postgresql+asyncpg://musicbot:musicbot@127.0.0.1:5431/musicbot",
             )
             or "",
-            redis_url=_env(values, "REDIS_URL", "redis://localhost:6379/0") or "",
+            redis_url=_env(values, "REDIS_URL", "redis://127.0.0.1:16379/0") or "",
             webapp_base_url=_env(values, "WEBAPP_BASE_URL"),
             webhook_base_url=_env(values, "WEBHOOK_BASE_URL"),
             webhook_secret=_env(values, "WEBHOOK_SECRET"),
