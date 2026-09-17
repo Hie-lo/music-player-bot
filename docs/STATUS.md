@@ -42,4 +42,4 @@ Prepare the credentials and test environment locally, without sending values in 
 
 ## Next agent action
 
-Build and test the offline-safe Gate 1 tooling, then stop at the live POC boundary if the runtime prerequisites are still unavailable.
+Run the live Playback Proof of Concept as soon as the user-provided runtime prerequisites are available. Offline-safe Core and tooling may continue, but Gate 1 and Voice Chat playback must not be marked complete without the live test.

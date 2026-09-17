@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 - Gate-based project playbook.
 - Initial secure environment template and stage status tracking.
 - Initial Python project foundation and local Assistant Session generator.
+- Platform-independent queue, playback state and single-writer actor primitives with tests.
 
 ### Notes
 
